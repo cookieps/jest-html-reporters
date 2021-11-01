@@ -105,9 +105,10 @@ class MyCustomReporter {
     if (!multipleReportsUnitePath) {
       const htmlTemplate = fs.readFileSync(localTemplatePath, "utf-8");
       const updatedData = JSON.stringify(data).split("$").join("Dollar Sign");
+      const filteredData = JSON.stringify(updatedData).split("&quot;").join("Quote symbol");
       const outPutContext = htmlTemplate.replace(
         "$resultData",
-        updatedData
+          filteredData
       );
       fs.writeFileSync(filePath, outPutContext, "utf-8");
       console.log("📦 reporter is created on:", filePath);
